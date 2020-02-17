@@ -19,11 +19,42 @@ const cheerio = require("cheerio");
     entry_data: {
       ProfilePage: {
         [0]: {
-          graphql: { user },
-        },
-      },
-    },
+          graphql: { user }
+        }
+      }
+    }
   } = JSON.parse(script_regex[1]);
+
+  var {
+    entry_data: {
+      ProfilePage: {
+        [0]: {
+          graphql: {
+            user: {
+              edge_owner_to_timeline_media: { edges }
+            }
+          }
+        }
+      }
+    }
+  } = JSON.parse(script_regex[1]);
+
+  let posts = [];
+
+  for (let edge of edges) {
+    let { node } = edge;
+
+    posts.push({
+      id: node.id,
+      shortcode: node.shortcode,
+      timestamp: node.taken_at_timestamp,
+      likes: node.edge_liked_by.count,
+      comments: node.edge_media_to_comment.count,
+      video: node.video_view_count,
+      image_url: node.display_url,
+      caption: node.edge_media_to_caption.edges[0].node.text
+    });
+  }
 
   let instagram_data = {
     followers: user.edge_followed_by.count,
@@ -31,9 +62,8 @@ const cheerio = require("cheerio");
     uploads: user.edge_owner_to_timeline_media.count,
     fullname: user.full_name,
     picture_url: user.profile_pic_url_hd,
+    posts
   };
-
-  console.log(instagram_data);
 
   debugger;
 })();
