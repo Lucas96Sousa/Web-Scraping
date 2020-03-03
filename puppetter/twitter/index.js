@@ -11,7 +11,9 @@ const twitter = require("./twitter");
 
   await twitter.login(USERNAME, PASSWORD);
 
-  await twitter.postTweet("Último Teste");
+  let detail = await twitter.getUser("rodrigueslilla");
+
+  // await twitter.postTweet("Teste do bot 2");
 
   debugger;
 })();
