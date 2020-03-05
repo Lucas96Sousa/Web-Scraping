@@ -4,7 +4,9 @@ Cheerio e puppeteer.
 
 
 Para o projeto do twitter é necessário algumas alterações no projeto:
-1.No followers e following é necessário alterar o a[href="/nome da conta/..."], pois para cada conta o css muda.
+1.No followers e following é necessário alterar o a[href="/nome da conta/..."].
+2. Como o css muda para cada conta no twitter é necessário procurar o selector da respectiva query que deseja.
+
 
 Para o moódulo do instagram, será feita alterações futuras.
 
