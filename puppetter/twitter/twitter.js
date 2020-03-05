@@ -72,26 +72,51 @@ const twitter = {
       return {
         fullName: document.querySelector(
           'div[class="css-1dbjc4n r-1awozwy r-18u37iz r-dnmrzs"]'
-        ).innerText,
+        )
+          ? document.querySelector(
+              'div[class="css-1dbjc4n r-1awozwy r-18u37iz r-dnmrzs"]'
+            ).textContent
+          : false,
+
         description: document.querySelector(
           'div [data-testid="UserDescription"]'
-        ).innerText,
-        followers: document.querySelector('div [class="css-1dbjc4n r-1joea0r"]')
-          .innerText,
-        following: document.querySelector('a[href="/rodrigueslilla/following"]')
-          .innerText,
-        location: document
-          .querySelector('div[data-testid="UserProfileHeader_Items"]')
-          .textContent.slice(0, 2),
-        link: document.querySelector('a[target="_blank"').textContent,
+        )
+          ? document.querySelector('div [data-testid="UserDescription"]')
+              .textContent
+          : false,
+        followers: document.querySelector('a[href="/PokeDolar/followers"]')
+          ? document.querySelector('a[href="/PokeDolar/followers"]').textContent
+              .textContent
+          : false,
+        following: document.querySelector('a[href="/PokeDolar/following"]')
+          ? document.querySelector('a[href="/PokeDolar/following"]').textContent
+          : false,
+        location: document.querySelector(
+          'div[data-testid="UserProfileHeader_Items"]'
+        )
+          ? document
+              .querySelector('div[data-testid="UserProfileHeader_Items"]')
+              .textContent.slice(0, 26)
+          : false,
+        link: document.querySelector('a[target="_blank"')
+          ? document.querySelector('a[target="_blank"').textContent
+          : false,
 
         tweetCount: document.querySelector(
           "div.css-1dbjc4n.r-16y2uox.r-1wbh5a2.r-1pi2tsx.r-1777fci > div > div"
-        ).textContent,
+        )
+          ? document.querySelector(
+              "div.css-1dbjc4n.r-16y2uox.r-1wbh5a2.r-1pi2tsx.r-1777fci > div > div"
+            ).textContent
+          : false,
 
         register: document.querySelector(
-          "div:nth-child(1) > div > div:nth-child(4) > div > span:nth-child(3)"
-        ).textContent,
+          " div > div:nth-child(1) > div > div:nth-child(4) > div > span"
+        )
+          ? document.querySelector(
+              " div > div:nth-child(1) > div > div:nth-child(4) > div > span"
+            ).textContent
+          : false,
       };
     });
 
