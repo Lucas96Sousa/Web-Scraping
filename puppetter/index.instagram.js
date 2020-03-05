@@ -1,5 +1,9 @@
 const puppeteer = require("puppeteer");
 
+const USERNAME = process.env.USER;
+const PASSWORD = process.env.PASSWORD;
+
+
 (async () => {
   const browser = await puppeteer.launch({ headless: false });
   const page = await browser.newPage();
@@ -17,10 +21,10 @@ const puppeteer = require("puppeteer");
 
   await page.waitFor('input[name="username"]');
 
-  await page.type('input[name="username"]', "lucas996oliveira@live.com", {
+  await page.type('input[name="username"]', USERNAME, {
     delay: 100,
   });
-  await page.type('input[name="password"]', "Ks@25252624", {
+  await page.type('input[name="password"]',PASSWORD, {
     delay: 100,
   });
 
