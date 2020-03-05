@@ -9,9 +9,11 @@ const twitter = require("./twitter");
 
   await twitter.initialize();
 
-  await twitter.login(USERNAME, PASSWORD);
+  await twitter.getTweets("PokeDolar", 50);
 
-  let detail = await twitter.getUser("PokeDOlar");
+  // await twitter.login(USERNAME, PASSWORD);
+
+  // let detail = await twitter.getUser("PokeDOlar");
 
   // await twitter.postTweet("Teste do bot 2");
 

@@ -123,6 +123,70 @@ const twitter = {
     return details;
   },
 
+  getTweets: async (username, count = 50) => {
+    let url = await page.url();
+
+    if (url != USERNAME_URL(username)) {
+      await page.goto(USERNAME_URL(username));
+
+      await page.waitFor('article[role="article"]');
+
+      let tweetsArray = await page.$$('article[role="article"]');
+      let lastTweetsArrayLenght = 0;
+      let tweets = [];
+      while (tweetsArray.length < count) {
+        if (lastTweetsArrayLenght == tweetsArray.length) break;
+        await page.evaluate(`window.scrollTo(0, document.body.scrollHeight)`);
+        await page.waitFor(3000);
+
+        tweetsArray = await page.$$('article[role="article"]');
+
+        if (lastTweetsArrayLenght == tweetsArray.length) break;
+
+        lastTweetsArrayLenght = tweetsArray.length;
+      }
+
+      for (let tweetElement of tweetsArray) {
+        let tweet = await tweetElement.$eval(
+          'div[lang="pt"]',
+          element => element.textContent
+        );
+
+        let postedDate = await tweetElement.$eval(
+          "time[datetime]",
+          element => element.textContent
+        );
+
+        let commitsCount = await tweetElement.$eval(
+          'div[data-testid="reply"]',
+          element => element.textContent
+        );
+
+        let repliesCount = await tweetElement.$eval(
+          'div[data-testid="retweet"]',
+          element => element.textContent
+        );
+
+        let likesCount = await tweetElement.$eval(
+          'div[data-testid="like"]',
+          element => element.textContent
+        );
+
+        tweets.push({
+          tweet,
+          postedDate,
+          commitsCount,
+          repliesCount,
+          likesCount,
+        });
+      }
+
+      tweets.slice(0, count);
+
+      return tweets;
+    }
+  },
+
   end: async () => {
     await browser.close();
   },
