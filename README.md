@@ -8,6 +8,6 @@ Para o projeto do twitter é necessário algumas alterações no projeto:
 2. Como o css muda para cada conta no twitter é necessário procurar o selector da respectiva query que deseja.
 
 
-Para o moódulo do instagram, será feita alterações futuras.
+Para o módulo do instagram, será feita alterações futuras.
 
 Dicas e sujestões de projetos são bem vindas.
